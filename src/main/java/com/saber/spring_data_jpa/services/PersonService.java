@@ -2,6 +2,7 @@ package com.saber.spring_data_jpa.services;
 
 import com.saber.spring_data_jpa.model.Person;
 import com.saber.spring_data_jpa.model.PersonDto;
+import com.saber.spring_data_jpa.model.SimplePerson;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface PersonService {
     Person update(PersonDto personDto);
     Boolean delete(Long id);
     Person findById(Long id);
+    SimplePerson findSimplePersonByNationalCode(String nationalCode);
 }

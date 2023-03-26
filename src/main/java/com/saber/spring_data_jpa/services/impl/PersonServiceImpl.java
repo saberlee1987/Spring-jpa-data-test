@@ -4,6 +4,7 @@ import com.saber.spring_data_jpa.exceptions.ResourceDuplicationException;
 import com.saber.spring_data_jpa.exceptions.ResourceNotFoundException;
 import com.saber.spring_data_jpa.model.Person;
 import com.saber.spring_data_jpa.model.PersonDto;
+import com.saber.spring_data_jpa.model.SimplePerson;
 import com.saber.spring_data_jpa.repositories.PersonRepository;
 import com.saber.spring_data_jpa.services.PersonService;
 import jakarta.transaction.Transactional;
@@ -67,6 +68,15 @@ public class PersonServiceImpl implements PersonService {
             throw new ResourceNotFoundException(String.format("person for id %s does not exist", id));
         }
         return optionalPerson.get();
+    }
+
+    @Override
+    public SimplePerson findSimplePersonByNationalCode(String nationalCode) {
+        Optional<SimplePerson> simplePersonByNationalCode = personRepository.findSimplePersonByNationalCode(nationalCode);
+        if (simplePersonByNationalCode.isEmpty()){
+            throw new ResourceNotFoundException(String.format("person for nationalCode %s does not exist", nationalCode));
+        }
+        return simplePersonByNationalCode.get();
     }
 
     private void checkPersonDuplicateByNationalCode(String nationalCode) {

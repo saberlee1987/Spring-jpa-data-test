@@ -3,6 +3,7 @@ package com.saber.spring_data_jpa.main;
 import com.saber.spring_data_jpa.config.AppConfig;
 import com.saber.spring_data_jpa.model.Person;
 import com.saber.spring_data_jpa.model.PersonDto;
+import com.saber.spring_data_jpa.model.SimplePerson;
 import com.saber.spring_data_jpa.services.PersonService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -25,6 +26,11 @@ public class MainApp {
 //        personDto.setId(id);
 //        personService.update(personDto);
         //personService.delete(id);
+
+        SimplePerson simplePerson = personService.findSimplePersonByNationalCode("0079028748");
+
+        String s= String.format("{\"firstName\":\"%s\",\"lastName\":\"%s\",\"nationalCode\":\"%s\"}", simplePerson.getFirstName(),simplePerson.getLastName(),simplePerson.getNationalCode());
+        System.out.println("simple Person  ===> "+s);
 
 
         List<Person> personList = personService.findAll();
